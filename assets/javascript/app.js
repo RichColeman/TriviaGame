@@ -94,51 +94,34 @@ function startGame() {
   incorrectGuesses = 0;
 }
 
-// function countdown(secs, elem) {
-//   var element = $(elem);
-//   element.text("Time: " + secs);
-//   if (secs < 1 || ) {
-//     clearTimeout(timer);
-//     showAnswer();
-//     $("#verdict").text(
-//       "D'OH! Too slow! The  answer is: " +
-//         triviaQuestions[questionIndex].options[
-//           triviaQuestions[questionIndex].correctAnswer
-//         ]
-//     );
-//     incorrectGuesses += 1;
-//     setTimeout(nextQuestion, 5000);
-//   }
-//   secs--;
-//   var timer = setTimeout("countdown(" + secs + ',"' + elem + '")', 1000);
-
+// function startTimer() {
+//   gameTimer = setInterval(function() {
+//     totalGametime--;
+//     $(".timer").text(totalGametime);
+//     if (totalGametime === 0) {
+//       clearInterval(gameTimer);
+//       $(".timer").empty();
+//       showAnswer();
+//       $("#verdict").show();
+//       $("#verdict").text(
+//         "D'OH! That's wrong! The correct answer is actually: " +
+//           triviaQuestions[questionIndex].options[
+//             triviaQuestions[questionIndex].correctAnswer
+//           ]
+//       );
+//       incorrectGuesses += 1;
+//       setTimeout(displayQuestion, 5000);
+//     }
+//   }, 1000);
 // }
 
-function startTimer() {
-  gameTimer = setInterval(function() {
-    totalGametime--;
-    $(".timer").text(totalGametime);
-    if (totalGametime === 0) {
-      setInterval(gameTimer);
-      $(".timer").empty();
-      showAnswer();
-      $("#verdict").text(
-        "D'OH! That's wrong! The correct answer is actually: " +
-          triviaQuestions[questionIndex].options[
-            triviaQuestions[questionIndex].correctAnswer
-          ]
-      );
-      incorrectGuesses += 1;
-      setTimeout(nextQuestion, 5000);
-    }
-  }, 1000);
-}
-
 function displayQuestion() {
+  // clearInterval(gameTimer);
+  $(".results").empty();
   $("#gif").empty();
   $("#verdict").empty();
   $(".timer").empty();
-  startTimer();
+  // startTimer();
   $(".question").text(triviaQuestions[questionIndex].question);
   for (i = 0; i < triviaQuestions[i].options.length; i++) {
     $(".options").append(
@@ -155,17 +138,25 @@ function displayQuestion() {
 function showAnswer() {
   $(".question").empty();
   $(".options").empty();
-  $(".timer").empty();
+  // $(".timer").empty();
   $("#gif").html(
     "<img src='" + triviaQuestions[questionIndex].gif + "'alt='simpsons gif'>"
   );
-  questionIndex += 1;
 }
 
-function nextQuestion() {
-  displayQuestion();
+function endGame() {
+  $(".question").empty();
+  $("#gif").empty();
+  $("#verdict").empty();
+  $(".results").append(
+    "All done! <br> You got " + correctGuesses + " right and " + incorrectGuesses +" wrong. Thanks for playing!"
+  );
+  correctGuesses = 0;
+  incorrectGuesses = 0;
+  totalGametime = 30;
+  questionIndex = 0;
+  $(".start").show();
 }
-function endGame() {}
 // display a message
 // reset the game
 // cancel timer
@@ -183,7 +174,6 @@ $(document).on("click", ".start", function() {
 
 $(document).on("click", ".option-buttons", function() {
   var clickedButton = $(this);
-  $(".timer").empty();
   if (
     parseInt(clickedButton.attr("data-value")) ===
     triviaQuestions[questionIndex].correctAnswer
@@ -191,16 +181,28 @@ $(document).on("click", ".option-buttons", function() {
     showAnswer();
     $("#verdict").text("WOO-HOO! You're right!");
     correctGuesses += 1;
-    setTimeout(displayQuestion, 5000);
+    questionIndex += 1;
+    if (questionIndex === triviaQuestions.length) {
+      console.log("that's it!");
+      setTimeout(endGame, 5000);
+    } else {
+      setTimeout(displayQuestion, 5000);
+    }
   } else {
     showAnswer();
     $("#verdict").text(
-      "D'OH! That's wrong! The correct answer is actually: " +
+      "D'OH! That's wrong! The correct answer is actually " +
         triviaQuestions[questionIndex].options[
           triviaQuestions[questionIndex].correctAnswer
         ]
     );
     incorrectGuesses += 1;
-    setTimeout(displayQuestion, 5000);
+    questionIndex += 1;
+    if (questionIndex === triviaQuestions.length) {
+      console.log("that's it!");
+      setTimeout(endGame, 5000);
+    } else {
+      setTimeout(displayQuestion, 5000);
+    }
   }
 });

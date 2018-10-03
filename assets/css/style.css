@@ -1,7 +1,12 @@
 .option-buttons {
     margin-bottom: 10px;
+    align-content: center;
 }
 
 .timer {
     text-align: center;
+}
+
+.bg {
+    background-image: url("/assets/images/clouds.jpg");
 }
