@@ -28,6 +28,7 @@
 
 body {
     background-image: url("https://vignette.wikia.nocookie.net/simpsons/images/b/b7/Simspons_Clouds.jpg/revision/latest?cb=20100824223324");
+    background-repeat: no-repeat;
 }
 
 #gif {
