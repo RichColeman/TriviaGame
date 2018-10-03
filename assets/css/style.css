@@ -1,6 +1,6 @@
 .title {
     font-family: Arial, Helvetica, sans-serif;
-    color: rgb(255, 195, 42);
+    color: #110b00;
     font-weight: bolder;
     font-style: italic;
     font-size: 3em;
@@ -8,7 +8,7 @@
 
 .question, #verdict, .results {
     font-family: Arial, Helvetica, sans-serif;
-    color: rgb(255, 195, 42);
+    color: #110b00;
     font-weight: bold;
     font-size: 2.2em;
     display: flex;
