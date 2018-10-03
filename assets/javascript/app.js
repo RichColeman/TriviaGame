@@ -20,7 +20,7 @@ var triviaQuestions = [
   },
   {
     question:
-      "Lisa Simpson views this male character more as a big sister, than as a love interest.",
+      "Lisa Simpson views this character more as a big sister, than as a love interest.",
     correctAnswer: 1,
     options: [
       "Ralph Wiggum",
