@@ -4,6 +4,8 @@
     font-weight: bolder;
     font-style: italic;
     font-size: 3em;
+    display: flex;
+    justify-content: center;
 }
 
 .question, #verdict, .results {
