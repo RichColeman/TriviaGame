@@ -149,7 +149,7 @@ function endGame() {
   $("#gif").empty();
   $("#verdict").empty();
   $(".results").append(
-    "All done! <br> You got " + correctGuesses + " right and " + incorrectGuesses +" wrong. Thanks for playing!"
+    "All done! <br> You got " + correctGuesses + " right and " + incorrectGuesses +" wrong. Thanks for playing! See how many times you can play this game in an hour... and then try to break that record!"
   );
   correctGuesses = 0;
   incorrectGuesses = 0;
