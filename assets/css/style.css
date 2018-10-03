@@ -11,7 +11,6 @@
     color: rgb(255, 195, 42);
     font-weight: bold;
     font-size: 2.2em;
-    z-index: 99999;
     display: flex;
     justify-content: center;
 }
@@ -20,17 +19,11 @@
 .option-buttons {
     margin-bottom: 10px;
     margin-left: 40px;
-    z-index: 99999;
 
 }
 
 .timer {
     text-align: center;
-}
-
-.jumbotron {
-    opacity: 0.5;
-    z-index: 1;
 }
 
 body {
