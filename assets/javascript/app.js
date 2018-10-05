@@ -79,7 +79,7 @@ var incorrectGuesses = 0;
 var questionIndex = 0;
 var currentQuestion;
 var gameTimer;
-var totalGametime = 15;
+var totalGametime;
 var isLastQuestion = false;
 
 var audio = new Audio("./assets/images/The Simpsons.mp3");
@@ -94,33 +94,36 @@ function startGame() {
   incorrectGuesses = 0;
 }
 
-// function startTimer() {
-//   gameTimer = setInterval(function() {
-//     totalGametime--;
-//     $(".timer").text(totalGametime);
-//     if (totalGametime === 0) {
-//       clearInterval(gameTimer);
-//       $(".timer").empty();
-//       showAnswer();
-//       $("#verdict").show();
-//       $("#verdict").text(
-//         "D'OH! That's wrong! The correct answer is actually: " +
-//           triviaQuestions[questionIndex].options[
-//             triviaQuestions[questionIndex].correctAnswer
-//           ]
-//       );
-//       incorrectGuesses += 1;
-//       setTimeout(displayQuestion, 5000);
-//     }
-//   }, 1000);
-// }
+function startTimer() {
+  gameTimer = setInterval(function() {
+    $(".timer").text("You've got " + totalGametime + " seconds left!");
+    totalGametime--;
+    if (totalGametime < 0) {
+      $(".timer").empty();
+      $(".timer").text("TIME'S UP!");
+      endGame();
+      clearInterval(gameTimer);
+      // $(".timer").empty();
+      // showAnswer();
+      // $("#verdict").show();
+      // $("#verdict").text(
+      //   "D'OH! That's wrong! The correct answer is actually: " +
+      //     triviaQuestions[questionIndex].options[
+      //       triviaQuestions[questionIndex].correctAnswer
+          // ]
+      // );
+      // incorrectGuesses += 1;
+      // setTimeout(displayQuestion, 5000);
+    }
+  }, 1000);
+}
 
 function displayQuestion() {
   // clearInterval(gameTimer);
   $(".results").empty();
   $("#gif").empty();
   $("#verdict").empty();
-  $(".timer").empty();
+  // $(".timer").empty();
   // startTimer();
   $(".question").text(triviaQuestions[questionIndex].question);
   for (i = 0; i < triviaQuestions[i].options.length; i++) {
@@ -146,6 +149,11 @@ function showAnswer() {
 
 function endGame() {
   $(".question").empty();
+  $(".instructions").empty();
+  clearInterval(gameTimer);
+  $(".timer").empty();
+  $(".options").empty();
+  $(".option-buttons").empty();
   $("#gif").empty();
   $("#verdict").empty();
   $(".results").append(
@@ -153,22 +161,17 @@ function endGame() {
   );
   correctGuesses = 0;
   incorrectGuesses = 0;
-  totalGametime = 30;
   questionIndex = 0;
   $(".start").show();
 }
-// display a message
-// reset the game
-// cancel timer
-// anything else
 
-//game
-
-// --------- EVENT LISTENERS --------- //
+// --------- EVENT HANDLERS --------- //
 
 $(document).on("click", ".start", function() {
+  totalGametime = 90;
   $("button").hide();
   displayQuestion();
+  startTimer();
   audio.play();
 });
 
