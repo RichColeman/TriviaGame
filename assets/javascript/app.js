@@ -87,9 +87,7 @@ var audio = new Audio("./assets/images/The Simpsons.mp3");
 // --------- FUNCTIONS ------ //
 
 function startGame() {
-  // display question
   displayQuestion();
-  // set score (correctGuess, incorrectGuesses)
   correctGuesses = 0;
   incorrectGuesses = 0;
 }
@@ -103,28 +101,14 @@ function startTimer() {
       $(".timer").text("TIME'S UP!");
       endGame();
       clearInterval(gameTimer);
-      // $(".timer").empty();
-      // showAnswer();
-      // $("#verdict").show();
-      // $("#verdict").text(
-      //   "D'OH! That's wrong! The correct answer is actually: " +
-      //     triviaQuestions[questionIndex].options[
-      //       triviaQuestions[questionIndex].correctAnswer
-          // ]
-      // );
-      // incorrectGuesses += 1;
-      // setTimeout(displayQuestion, 5000);
     }
   }, 1000);
 }
 
 function displayQuestion() {
-  // clearInterval(gameTimer);
   $(".results").empty();
   $("#gif").empty();
   $("#verdict").empty();
-  // $(".timer").empty();
-  // startTimer();
   $(".question").text(triviaQuestions[questionIndex].question);
   for (i = 0; i < triviaQuestions[i].options.length; i++) {
     $(".options").append(
@@ -141,16 +125,15 @@ function displayQuestion() {
 function showAnswer() {
   $(".question").empty();
   $(".options").empty();
-  // $(".timer").empty();
   $("#gif").html(
     "<img src='" + triviaQuestions[questionIndex].gif + "'alt='simpsons gif'>"
   );
 }
 
 function endGame() {
+  clearInterval(gameTimer);
   $(".question").empty();
   $(".instructions").empty();
-  clearInterval(gameTimer);
   $(".timer").empty();
   $(".options").empty();
   $(".option-buttons").empty();
